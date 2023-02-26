@@ -1,6 +1,9 @@
 package com.niit.bej.springbootc5pc1.repositry;
 
+import com.niit.bej.springbootc5pc1.domain.Movie;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface MovieRepository extends CrudRepository {
+@Repository
+public interface MovieRepository extends CrudRepository<Movie, Integer> {
 }
