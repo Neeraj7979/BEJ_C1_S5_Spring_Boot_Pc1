@@ -3,6 +3,8 @@ package com.niit.bej.springbootc5pc1.domain;
 import jakarta.persistence.Entity;
 import org.springframework.data.annotation.Id;
 
+import java.util.Objects;
+
 @Entity
 public class Movie {
     @Id
@@ -51,5 +53,18 @@ public class Movie {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Movie movie = (Movie) o;
+        return movieID == movie.movieID && yearOfRelease == movie.yearOfRelease && Objects.equals(movieName, movie.movieName) && Objects.equals(genre, movie.genre);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(movieID, movieName, yearOfRelease, genre);
     }
 }
