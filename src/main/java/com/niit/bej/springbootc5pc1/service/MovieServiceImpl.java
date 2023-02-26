@@ -3,10 +3,12 @@ package com.niit.bej.springbootc5pc1.service;
 import com.niit.bej.springbootc5pc1.domain.Movie;
 import com.niit.bej.springbootc5pc1.repositry.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class MovieServiceImpl implements MovieService {
     private final MovieRepository movieRepository;
 
