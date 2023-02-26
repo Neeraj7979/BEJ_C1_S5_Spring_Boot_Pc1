@@ -7,9 +7,9 @@ import java.util.List;
 public interface MovieService {
     List<Movie> getAllMovies();
 
-    boolean addMovie(Movie movie);
+    Movie addMovie(Movie movie);
 
-    boolean updateMovie(int movieId, Movie movie);
+    boolean updateMovie(int movieId, Movie movie) throws Exception;
 
-    Movie deleteMovieById(int movieId);
+    void deleteMovieById(int movieId);
 }

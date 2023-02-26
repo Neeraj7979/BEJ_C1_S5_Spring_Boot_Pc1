@@ -5,6 +5,7 @@ import com.niit.bej.springbootc5pc1.repositry.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Optional;
 
 public class MovieServiceImpl implements MovieService {
     private final MovieRepository movieRepository;
@@ -16,21 +17,33 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public List<Movie> getAllMovies() {
-        return null;
+        return (List<Movie>) movieRepository.findAll();
     }
 
     @Override
-    public boolean addMovie(Movie movie) {
-        return false;
+    public Movie addMovie(Movie movie) {
+        return movieRepository.save(movie);
     }
 
     @Override
-    public boolean updateMovie(int movieId, Movie movie) {
-        return false;
+    public boolean updateMovie(int movieId, Movie movie) throws Exception {
+        Optional<Movie> movieFromDatabase = movieRepository.findById(movieId);
+        if (movieFromDatabase.isPresent()) {
+            Movie movie1 = movieFromDatabase.get();
+            movie1.setMovieName(movie.getMovieName());
+            movie.setGenre(movie.getGenre());
+            movie.setYearOfRelease(movie.getYearOfRelease());
+            movieRepository.save(movie);
+        } else {
+            throw new Exception("The movie with the ID " + movieId + " was not found in the database.");
+        }
+        return true;
+
+
     }
 
     @Override
-    public Movie deleteMovieById(int movieId) {
-        return null;
+    public void deleteMovieById(int movieId) {
+        movieRepository.deleteById(movieId);
     }
 }
